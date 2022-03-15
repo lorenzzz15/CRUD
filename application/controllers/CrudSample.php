@@ -15,6 +15,24 @@ class CrudSample extends CI_Controller
     public function create()
     {
         $this->crud_model->createData();
-        redirect("CrudSample");
+        redirect("crudsample");
+    }
+    public function update($id)
+    {
+        $this->crud_model->updateData($id);
+        redirect('crudsample');
+    }
+    public function edit($id)
+    {
+        $data['title'] = 'CRUD Edit';
+        $data['row'] = $this->crud_model->getData($id);
+        $this->load->view('templates/header');
+        $this->load->view('crudsample/crudedit', $data);
+        $this->load->view('templates/footer');
+    }
+    public function delete($id)
+    {
+        $this->crud_model->deleteData($id);
+        redirect('crudsample');
     }
 }

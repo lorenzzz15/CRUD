@@ -1,13 +1,14 @@
 <br>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btn1">
+
     Add Data
 </button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog" id="dialogmodal">
         <div class="modal-content">
             <div class="modal-body">
                 <form method="post" action="<?php echo site_url('CrudSample/create') ?>">
@@ -33,13 +34,15 @@
                             <input type="date" class="form-control" name="birthdate" aria-describedby="bdHelp" placeholder="Enter Birthdate">
                         </div>
                         <button type="submit" class="btn btn-primary" value="save">Save changes</button>
+                    </fieldset>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<table class="table table-hover">
+
+<table class="table table-hover" id="tibol">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -55,16 +58,24 @@
         <?php foreach ($crudsample as $row) { ?>
             <tr>
                 <th scope="row"><?php echo $row->id; ?></th>
-                <td><?php echo $row->last_name; ?></td>
                 <td><?php echo $row->first_name; ?></td>
+                <td><?php echo $row->last_name; ?></td>
                 <td><?php echo $row->address; ?></td>
                 <td><?php echo $row->contact_no; ?></td>
                 <td><?php echo $row->birthdate; ?></td>
                 <td>
-                    <a href="<?php echo site_url('CrudSample/edit'); ?>/<?php echo $row->id; ?>">Edit</a> |
-                    <a href="<?php echo site_url('CrudSample/delete'); ?>/<?php echo $row->id; ?>">Delete</a>
+                    <a href="<?php echo site_url('crudsample/edit'); ?>/<?php echo $row->id; ?>">Edit</a> |
+                    <a href="<?php echo site_url('crudsample/delete'); ?>/<?php echo $row->id; ?>">Delete</a>
                 </td>
             </tr>
         <?php } ?>
     </tbody>
 </table>
+<script>
+    $(document).ready(function() {
+        $('#tibol').hide().show(1000);
+    })
+    $('#btn1').on('click', function() {
+        $('#dialogmodal').show();
+    });
+</script>
